@@ -150,7 +150,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ElevatedButton(onPressed: changeUp, style: ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 15)), child: const Text('Назад')),
+                ElevatedButton(onPressed: changeDown, style: ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 15)), child: const Text('Назад')),
                 const SizedBox(width: 20),
                 ElevatedButton(onPressed: changeUp, style: ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 15)), child: const Text('Вперед')),
               ],
