@@ -55,50 +55,140 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  int _currentImageIndex=0;
+  List<String> _imageUrls=[
+    "https://traveltimes.ru/wp-content/uploads/2021/09/7c20839d1cbe4993ba7d13ec77159050.max-1200x800-1.jpg",
+    "https://crosti.ru/patterns/00/26/6c/70_picture_a6b2e933.jpg",
+    "https://sportishka.com/uploads/posts/2022-11/1667558932_1-sportishka-com-p-samoe-glubokoe-ozero-baikal-krasivo-1.jpg",
+    "https://sportishka.com/uploads/posts/2022-11/1667490288_22-sportishka-com-p-ozero-baikal-turizm-krasivo-25.jpg",
+    "http://storage.yandexcloud.net/storage.yasno.media/nat-geo/images/2019/9/29/f9a733f5ce1b4bf28636f728bd553fd6.max-1200x800.jpg",
+    "https://vsegda-pomnim.com/uploads/posts/2022-03/1647367459_6-vsegda-pomnim-com-p-ozero-khantaiskoe-foto-6.jpg"
+  ];
+
+  List<String> _nameUrls=[
+    "Горы Алтая",
+    "Озеро Байкал",
+    "Хантайское озеро"
+  ];
+  int _str_counter = 0;
+  String str='Первый текст';
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
+
+
+    void changeUp(){
+      setState(() {
+        if (_str_counter<_nameUrls.length-1){
+          _str_counter++;
+        }
+        else{
+          _str_counter=0;
+        }
+        if (_currentImageIndex<_imageUrls.length-2){
+          _currentImageIndex++;
+          _currentImageIndex++;
+        }
+        else{
+          _currentImageIndex=0;
+        }
+      });
+    }
+    void changeDown(){
+      setState(() {
+        if (_str_counter>0){
+          _str_counter--;
+        }
+        else{
+          _str_counter=_nameUrls.length-1;
+        }
+        if (_currentImageIndex>0){
+          _currentImageIndex--;
+          _currentImageIndex--;
+        }
+        else{
+          _currentImageIndex=_imageUrls.length-2;
+        }
+      });
+    }
+
+
+
+
     return Scaffold(
       appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+        title: Text("Практическая №2"),
       ),
-      body: const Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
+      body: Center(
         child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
+
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'Сосин Дмитрий Максимович, БСБО-12-22, 22Б0104',
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Природные достопримечательности России",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color:Colors.black, fontSize: 30, fontWeight: FontWeight.bold),
+                ),
+              ],
             ),
+            SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  _nameUrls[_str_counter],
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color:Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+            SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(onPressed: changeUp, style: ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 15)), child: const Text('Назад')),
+                const SizedBox(width: 20),
+                ElevatedButton(onPressed: changeUp, style: ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 15)), child: const Text('Вперед')),
+              ],
+            ),
+            SizedBox(height: 20),
+            Row(
+              children: [
+               const Spacer(),
+                Column(
+                  children: [
+                    Image.network(
+                      _imageUrls[_currentImageIndex],
+                      width: MediaQuery.of(context).size.width * 0.4,
+                      height: MediaQuery.of(context).size.height * 0.4,
+                      fit: BoxFit.cover,
+                    ),
+                  ],
+                ),
+                const Spacer(),
+                Column(
+                  children: [
+                    Image.network(
+                      _imageUrls[_currentImageIndex+1],
+                      width: MediaQuery.of(context).size.width * 0.4,
+                      height: MediaQuery.of(context).size.height * 0.4,
+                      fit: BoxFit.cover,
+                    ),
+                  ],
+                ),
+                const Spacer(),
+              ]
+            ),
+
           ],
         ),
       ),
     );
   }
 }
+
+
