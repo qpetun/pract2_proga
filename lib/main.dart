@@ -38,6 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void deleteSeparatedItem(int index) {
     setState(() {
       separatedList.removeAt(index);
+
     });
   }
   @override
